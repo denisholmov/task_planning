@@ -1,0 +1,65 @@
+body {
+  background-color: #fff;
+  font-family: montserrat;
+}
+
+.container {
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+.content {
+  padding: 15px;
+  background-color: #f8f8f8;
+  .btn {
+    display: block;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+
+    color: #fff;
+    font-weight: 600;
+
+    background-color: #4fa2f0;
+    border-radius: 25px;
+  }
+
+  .tasksItem {
+    display: flex;
+    justify-content: space-between;
+
+    .item {
+      flex: 0 0 auto;
+      width: 25%;
+    }
+
+    .titleTask {
+      width: max-content;
+      height: 30px;
+      margin: 12px;
+      padding: 4px 12px;
+
+      border-radius: 25px;
+      background-color: #e1e4e8;
+
+      h2 {
+        font-size: 15px;
+        font-weight: 600;
+      }
+    }
+
+    .card {
+      max-width: 280px;
+      margin: 0 auto;
+      padding: 16px;
+      min-width: 50px;
+
+      border-radius: 8px;
+      background-color: #fff;
+      box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    h3 {
+      font-size: 15px;
+      font-weight: 400;
+    }
+  }
+}
