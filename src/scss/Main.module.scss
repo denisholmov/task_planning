@@ -1,0 +1,31 @@
+body {
+  background-color: #fff;
+  font-family: montserrat;
+}
+
+.container {
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+.content {
+  padding: 15px;
+
+  border-radius: 12px;
+  background-color: #f8f8f8;
+  .btn {
+    display: block;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+
+    color: #fff;
+    font-weight: 600;
+
+    background-color: #4fa2f0;
+    border-radius: 25px;
+
+    &:hover {
+      background-color: #77b6f0;
+    }
+  }
+}
