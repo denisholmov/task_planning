@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "../scss/Main.module.scss";
 import Categories from "./Categories";
+import CreateTask from "./CreateTask";
 
 const Main = () => {
   return (
@@ -8,7 +9,7 @@ const Main = () => {
       <div className={classes.tasks}>
         <div className={classes.container}>
           <div className={classes.content}>
-            <button className={classes.btn}>Добавить карточку</button>
+            <CreateTask />
 
             <Categories />
           </div>
