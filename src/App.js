@@ -1,7 +1,8 @@
 // import classes from "./App.module.scss";
+import React from "react";
 import classes from "./App.module.scss";
-import Header from "./components/Header";
-import Main from "./components/Main";
+import Header from "./components/Header/Header";
+import Main from "./components/Main/Main";
 
 const App = () => {
   return (

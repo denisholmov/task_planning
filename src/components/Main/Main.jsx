@@ -1,7 +1,7 @@
 import React from "react";
-import classes from "../scss/Main.module.scss";
-import Categories from "./Categories";
-import CreateTask from "./CreateTask";
+import classes from "./Main.module.scss";
+import Categories from "./Categories/Categories";
+import CreateTask from "./CreateTask/CreateTask";
 
 const Main = () => {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
-import classes from "../scss/Categories.module.scss";
-import TaskList from "./TaskList";
+import classes from "./Categories.module.scss";
+import TaskList from "./TaskList/TaskList";
 
 const Categories = () => {
   return (

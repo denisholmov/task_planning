@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "../scss/Categories.module.scss";
+import classes from "../Categories.module.scss";
 
 const TaskList = ({ titleTask, titleCard, colorTitleTaskBack }) => {
   return (
