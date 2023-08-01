@@ -11,6 +11,7 @@ const Modal = ({ activeModal, setActiveModal, children }) => {
       onClick={() => setActiveModal(false)}
     >
       <div className={classes.content} onClick={(e) => e.stopPropagation()}>
+        {/* Смотреть урок модальное окно, помоему на канале ulbi tv */}
         {children}
       </div>
     </div>
