@@ -1,16 +1,24 @@
 import React from "react";
 import classes from "./Categories.module.scss";
 import TaskList from "./TaskList/TaskList";
-import sectionTasks from "../../../assets/sectionTasks.json";
 
 const Categories = () => {
-  // https://64ca5c17700d50e3c704c7f0.mockapi.io/itemsTask - ссылка на mockApi
+  const [taskApplication, setTaskApplication] = React.useState([]);
 
-  //   fetch("https://64ca5c17700d50e3c704c7f0.mockapi.io/itemsTask");
+  React.useEffect(() => {
+    fetch("https://64ca5c17700d50e3c704c7f0.mockapi.io/itemsTask")
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        setTaskApplication(json);
+        console.log(taskApplication);
+      });
+  }, []);
 
   return (
     <div className={classes.categories}>
-      {sectionTasks.map((item) => (
+      {taskApplication.map((item) => (
         <TaskList
           key={item.id}
           titleTask={item.title}
