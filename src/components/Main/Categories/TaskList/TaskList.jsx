@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "../Categories.module.scss";
 
-const TaskList = ({ titleTask, titleCard, colorTitleTaskBack }) => {
+const TaskList = ({ titleTask, colorTitleTaskBack, sectionTask }) => {
   return (
     <div className={classes.taskList}>
       <div
@@ -11,10 +11,16 @@ const TaskList = ({ titleTask, titleCard, colorTitleTaskBack }) => {
         <h2>{titleTask}</h2>
       </div>
       <ul>
-        <li className={classes.card}>
-          <h3>{titleCard}</h3>
+        {sectionTask.task.map((value) => (
+          <li key={value.id} className={classes.card}>
+            <h3>{value.title}</h3>
+            <p>{value.text}</p>
+          </li>
+        ))}
+        {/* <li className={classes.card}>
+          <h3>{task}</h3>
           <p></p>
-        </li>
+        </li> */}
       </ul>
     </div>
   );

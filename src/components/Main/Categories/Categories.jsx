@@ -1,30 +1,19 @@
 import React from "react";
 import classes from "./Categories.module.scss";
 import TaskList from "./TaskList/TaskList";
+import sectionTasks from "../../../assets/sectionTasks.json";
 
 const Categories = () => {
   return (
     <div className={classes.categories}>
-      <TaskList
-        titleTask="Не запущен"
-        titleCard="Отведите коко к ветеринару"
-        colorTitleTaskBack="#E1E4E8"
-      />
-      <TaskList
-        titleTask="В процессе"
-        titleCard="Налоги"
-        colorTitleTaskBack="#F0E7F6"
-      />
-      <TaskList
-        titleTask="Заблокированный"
-        titleCard="Переезд"
-        colorTitleTaskBack="#FFDCE0"
-      />
-      <TaskList
-        titleTask="Сделано"
-        titleCard="Отксерокопить документы"
-        colorTitleTaskBack="#CBDFD8"
-      />
+      {sectionTasks.map((item) => (
+        <TaskList
+          key={item.id}
+          titleTask={item.title}
+          colorTitleTaskBack={item.color}
+          sectionTask={item}
+        /> // Сюда подгрузил 4 столбца с задачами
+      ))}
     </div>
   );
 };
