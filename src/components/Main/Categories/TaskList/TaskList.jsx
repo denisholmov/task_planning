@@ -29,10 +29,6 @@ const TaskList = ({ titleCategory, colorTitleCategoryBack, category }) => {
             <Task key={taskItem.id} taskItem={taskItem} />
           ) : undefined
         )}
-        {/* <li className={classes.card}>
-          <h3>{task}</h3>
-          <p></p>
-        </li> */}
       </ul>
     </div>
   );

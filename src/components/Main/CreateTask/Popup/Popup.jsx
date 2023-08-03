@@ -5,7 +5,7 @@ import Form from "./Form/Form";
 import sectionTasks from "../../../../assets/sectionTasks.json";
 
 const Popup = () => {
-  const [selected, setSelected] = React.useState(2); // состояние для списка задач, наведение на li
+  const [selected, setSelected] = React.useState(4); // состояние для списка задач, наведение на li
   let activeTask = classes.active; // создал эту переменную, чтобы записать в неё css модуль, иначе он не передастся в li
 
   const [activeModal, setActiveModal] = React.useState(false);
@@ -13,14 +13,15 @@ const Popup = () => {
   return (
     <div className={classes.taskPopup}>
       <ul>
-        {sectionTasks.map((item, i) => (
+        {sectionTasks.map((category, i) => (
           <li
-            key={item.id}
+            key={category.id}
             onMouseEnter={() => setSelected(i)}
+            onMouseLeave={() => setSelected(4)}
             onClick={() => setActiveModal(true)}
             className={selected === i ? `${activeTask}` : ""}
           >
-            {item.title}
+            {category.title}
           </li>
         ))}
       </ul>
