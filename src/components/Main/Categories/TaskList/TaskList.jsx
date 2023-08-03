@@ -2,7 +2,7 @@ import React from "react";
 import classes from "../Categories.module.scss";
 import Task from "./Task/Task";
 
-const TaskList = ({ titleCategory, colorTitleCategoryBack }) => {
+const TaskList = ({ titleCategory, colorTitleCategoryBack, category }) => {
   const [entireTaskList, setEntireTaskList] = React.useState([]);
 
   React.useEffect(() => {
@@ -24,9 +24,11 @@ const TaskList = ({ titleCategory, colorTitleCategoryBack }) => {
         <h2>{titleCategory}</h2>
       </div>
       <ul>
-        {entireTaskList.map((taskItem) => (
-          <Task key={taskItem.id} taskItem={taskItem} />
-        ))}
+        {entireTaskList.map((taskItem) =>
+          category.category === taskItem.category ? (
+            <Task key={taskItem.id} taskItem={taskItem} />
+          ) : undefined
+        )}
         {/* <li className={classes.card}>
           <h3>{task}</h3>
           <p></p>
