@@ -2,7 +2,7 @@ import React from "react";
 import classes from "../Categories.module.scss";
 import Task from "./Task/Task";
 
-const TaskList = ({ titleTask, colorTitleTaskBack }) => {
+const TaskList = ({ titleCategory, colorTitleCategoryBack }) => {
   const [entireTaskList, setEntireTaskList] = React.useState([]);
 
   React.useEffect(() => {
@@ -19,13 +19,13 @@ const TaskList = ({ titleTask, colorTitleTaskBack }) => {
     <div className={classes.taskList}>
       <div
         className={classes.titleTask}
-        style={{ backgroundColor: colorTitleTaskBack }}
+        style={{ backgroundColor: colorTitleCategoryBack }}
       >
-        <h2>{titleTask}</h2>
+        <h2>{titleCategory}</h2>
       </div>
       <ul>
-        {entireTaskList.map((item) => (
-          <Task item={item} />
+        {entireTaskList.map((taskItem) => (
+          <Task key={taskItem.id} taskItem={taskItem} />
         ))}
         {/* <li className={classes.card}>
           <h3>{task}</h3>

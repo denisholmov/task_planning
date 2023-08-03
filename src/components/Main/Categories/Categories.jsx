@@ -3,7 +3,7 @@ import classes from "./Categories.module.scss";
 import TaskList from "./TaskList/TaskList";
 
 const Categories = () => {
-  const [taskApplication, setTaskApplication] = React.useState([]);
+  const [taskCategories, setTaskCategories] = React.useState([]);
 
   React.useEffect(() => {
     fetch("https://64ca5c17700d50e3c704c7f0.mockapi.io/itemsTask")
@@ -11,19 +11,18 @@ const Categories = () => {
         return res.json();
       })
       .then((json) => {
-        setTaskApplication(json);
-        console.log(taskApplication);
+        setTaskCategories(json);
       });
   }, []);
 
   return (
     <div className={classes.categories}>
-      {taskApplication.map((item) => (
+      {taskCategories.map((category) => (
         <TaskList
-          key={item.id}
-          titleTask={item.title}
-          colorTitleTaskBack={item.color}
-          sectionTask={item}
+          key={category.id}
+          titleCategory={category.title}
+          colorTitleCategoryBack={category.color}
+          category={category}
         /> // Сюда подгрузил 4 столбца с задачами
       ))}
     </div>
