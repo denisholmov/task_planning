@@ -9,6 +9,12 @@ const Popup = () => {
   let activeTask = classes.active; // создал эту переменную, чтобы записать в неё css модуль, иначе он не передастся в li
 
   const [activeModal, setActiveModal] = React.useState(false);
+  const [rememberCategory, setRememberCategory] = React.useState(0); // в этот state запоминается категория, по которой сортируются новые созданные карточки
+
+  const handleClick = (category) => {
+    setActiveModal(!activeModal);
+    setRememberCategory(category);
+  };
 
   return (
     <div className={classes.taskPopup}>
@@ -18,7 +24,7 @@ const Popup = () => {
             key={category.id}
             onMouseEnter={() => setSelected(i)}
             onMouseLeave={() => setSelected(4)}
-            onClick={() => setActiveModal(true)}
+            onClick={() => handleClick(category.id)}
             className={selected === i ? `${activeTask}` : ""}
           >
             {category.title}
@@ -27,7 +33,11 @@ const Popup = () => {
       </ul>
       {activeModal && (
         <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
-          <Form />
+          <Form
+            activeModal={activeModal}
+            setActiveModal={setActiveModal}
+            rememberCategory={rememberCategory}
+          />
         </Modal>
       )}
     </div>
