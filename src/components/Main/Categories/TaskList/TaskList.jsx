@@ -1,10 +1,9 @@
 import React from "react";
-import classes from "../Categories.module.scss";
 import Task from "./Task/Task";
+import classes from "../Categories.module.scss";
 
 const TaskList = ({ titleCategory, colorTitleCategoryBack, category }) => {
   const [entireTaskList, setEntireTaskList] = React.useState([]);
-  
 
   React.useEffect(() => {
     fetch("https://64ca5c17700d50e3c704c7f0.mockapi.io/task")
@@ -15,8 +14,6 @@ const TaskList = ({ titleCategory, colorTitleCategoryBack, category }) => {
         setEntireTaskList(json);
       });
   }, []);
-
- 
 
   return (
     <div className={classes.taskList}>
