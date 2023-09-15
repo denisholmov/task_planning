@@ -1,15 +1,16 @@
 import React from "react";
+
 import classes from "./Form.module.scss";
 
 const Form = ({ activeModal, setActiveModal, rememberCategory }) => {
   const [searchInputTask, setSearchInputTask] = React.useState("");
   const [searchTextareaTask, setSearchTextareaTask] = React.useState("");
-  //   const [buttonActive, setButtonActive] = React.useState(false);
 
-  //   const [formData, setFormData] = React.useState({
-  //     heading: "",
-  //     note: "",
-  //   });
+
+  //   const [listCards, setListCards] = React.useState(); //Здесь хранятся созданные карточки --------
+
+  //   const [cardData, setCardData] = React.useState([]);
+  //   const [buttonActive, setButtonActive] = React.useState(false);
 
   const newTask = {
     category: rememberCategory,
@@ -25,7 +26,6 @@ const Form = ({ activeModal, setActiveModal, rememberCategory }) => {
   const handleInputChange = (event) => {
     setSearchInputTask(event.target.value);
   };
-
   const handleTextareaChange = (event) => {
     setSearchTextareaTask(event.target.value);
   };
@@ -44,6 +44,7 @@ const Form = ({ activeModal, setActiveModal, rememberCategory }) => {
       .then((data) => {
         console.log("Success:", data);
         setActiveModal(false);
+       
       })
       .catch((error) => {
         console.log("Произошла ошибка:", error);
