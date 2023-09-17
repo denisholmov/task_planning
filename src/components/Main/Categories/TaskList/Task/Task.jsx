@@ -8,7 +8,7 @@ const Task = ({ taskItem }) => {
   let taskItemId = taskItem.id;
   return (
     <li key={taskItem.id} className={classes.card}>
-      <div>
+      <div className={classes.content}>
         <h3>{taskItem.title}</h3>
         <p>{taskItem.text}</p>
       </div>

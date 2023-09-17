@@ -1,33 +1,31 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import {
+  setSearchInputTask,
+  setSearchTextareaTask,
+} from "../../../../../redux/slices/editTaskSlice";
 
 import classes from "./Form.module.scss";
 
-const Form = ({ activeModal, setActiveModal, rememberCategory }) => {
-  const [searchInputTask, setSearchInputTask] = React.useState("");
-  const [searchTextareaTask, setSearchTextareaTask] = React.useState("");
+const Form = ({ activeModal, setActiveModal }) => {
+  const categoryId = useSelector((state) => state.edit.categoryId);
+  const titleTask = useSelector((state) => state.edit.titleTask);
+  const textTask = useSelector((state) => state.edit.textTask);
 
-
-  //   const [listCards, setListCards] = React.useState(); //Здесь хранятся созданные карточки --------
-
-  //   const [cardData, setCardData] = React.useState([]);
-  //   const [buttonActive, setButtonActive] = React.useState(false);
+  const dispatch = useDispatch();
 
   const newTask = {
-    category: rememberCategory,
-    title: searchInputTask,
-    text: searchTextareaTask,
+    category: categoryId,
+    title: titleTask,
+    text: textTask,
   }; // Сюда будут создаваться новые задачи и затем передаваться по запросу POST
 
-  //   const handleInputChange = (event) => {
-  //     console.log(event.target);
-  //     setFormData({ ...formData, [event.target.name]: event.target.value });
-  //   };
-
   const handleInputChange = (event) => {
-    setSearchInputTask(event.target.value);
+    dispatch(setSearchInputTask(event.target.value));
   };
   const handleTextareaChange = (event) => {
-    setSearchTextareaTask(event.target.value);
+    dispatch(setSearchTextareaTask(event.target.value));
   };
 
   const handleSubmit = (event) => {
@@ -44,12 +42,11 @@ const Form = ({ activeModal, setActiveModal, rememberCategory }) => {
       .then((data) => {
         console.log("Success:", data);
         setActiveModal(false);
-       
       })
       .catch((error) => {
         console.log("Произошла ошибка:", error);
       });
-  };
+  }; // создаёт карточку
 
   return (
     <div>
@@ -65,7 +62,7 @@ const Form = ({ activeModal, setActiveModal, rememberCategory }) => {
             Отмена
           </button>
           <button
-            disabled={searchInputTask.length >= 1 ? false : true} // делаем кнопку активной либо неактивной
+            disabled={titleTask.length >= 1 ? false : true} // делаем кнопку активной либо неактивной
             className={classes.btnCreate}
             type="button"
             onClick={handleSubmit}
@@ -76,7 +73,7 @@ const Form = ({ activeModal, setActiveModal, rememberCategory }) => {
         <div className={classes.cardName}>
           <p>Заголовок</p>
           <input
-            value={searchInputTask}
+            value={titleTask}
             onChange={handleInputChange}
             placeholder="Добавить название"
             type="text"
@@ -86,7 +83,7 @@ const Form = ({ activeModal, setActiveModal, rememberCategory }) => {
         <div className={classes.cardNote}>
           <p>Заметки</p>
           <textarea
-            value={searchTextareaTask}
+            value={textTask}
             onChange={handleTextareaChange}
             placeholder="Добавить заметку"
             name="note"

@@ -2,18 +2,24 @@ import React from "react";
 import classes from "./Popup.module.scss";
 import Modal from "./Modal/Modal";
 import Form from "./Form/Form";
+import { useSelector, useDispatch } from "react-redux";
+import { setRememberCategory } from "../../../../redux/slices/editTaskSlice";
 import sectionTasks from "../../../../assets/sectionTasks.json";
 
 const Popup = () => {
+  //   const categoryId = useSelector((state) => state.edit.categoryId);
+  const dispatch = useDispatch();
+
   const [selected, setSelected] = React.useState(4); // состояние для списка задач, наведение на li
   let activeTask = classes.active; // создал эту переменную, чтобы записать в неё css модуль, иначе он не передастся в li
 
   const [activeModal, setActiveModal] = React.useState(false);
-  const [rememberCategory, setRememberCategory] = React.useState(0); // в этот state запоминается категория, по которой сортируются новые созданные карточки
+  //   const [rememberCategory, setRememberCategory] = React.useState(0); // в этот state запоминается категория, по которой сортируются новые созданные карточки
 
   const handleClick = (category) => {
     setActiveModal(!activeModal);
-    setRememberCategory(category);
+    //  setRememberCategory(category);
+    dispatch(setRememberCategory(category)); //передал категорию в диспатч
   };
 
   return (
@@ -36,7 +42,7 @@ const Popup = () => {
           <Form
             activeModal={activeModal}
             setActiveModal={setActiveModal}
-            rememberCategory={rememberCategory}
+            // rememberCategory={rememberCategory}
           />
         </Modal>
       )}
