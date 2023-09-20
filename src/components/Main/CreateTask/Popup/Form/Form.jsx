@@ -1,25 +1,27 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { fetchCreateTasks } from "../../../../../redux/slices/editTaskSlice";
 
 import {
   setSearchInputTask,
   setSearchTextareaTask,
+  setActiveModal,
 } from "../../../../../redux/slices/editTaskSlice";
 
 import classes from "./Form.module.scss";
 
-const Form = ({ activeModal, setActiveModal }) => {
+const Form = () => {
   const { categoryId, titleTask, textTask } = useSelector(
     (state) => state.edit
   );
 
   const dispatch = useDispatch();
 
-  const newTask = {
-    category: categoryId,
-    title: titleTask,
-    text: textTask,
-  }; // Сюда создаются новые задачи и затем передаются по запросу POST
+  //   const newTask = {
+  //     category: categoryId,
+  //     title: titleTask,
+  //     text: textTask,
+  //   }; // Сюда создаются новые задачи и затем передаются по запросу POST
 
   const handleInputChange = (event) => {
     dispatch(setSearchInputTask(event.target.value));
@@ -31,21 +33,18 @@ const Form = ({ activeModal, setActiveModal }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch("https://64ca5c17700d50e3c704c7f0.mockapi.io/task", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newTask),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-        setActiveModal(false);
-      })
-      .catch((error) => {
-        console.log("Произошла ошибка:", error);
-      });
+    try {
+      dispatch(
+        fetchCreateTasks({
+          categoryId,
+          titleTask,
+          textTask,
+        })
+      );
+    } catch (error) {
+      console.log("ERROR", error);
+      alert("Ошибка при создании карточки");
+    }
   }; // создаёт карточку
 
   return (

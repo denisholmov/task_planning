@@ -1,9 +1,13 @@
 import React from "react";
+import { setActiveModal } from "../../../../../redux/slices/editTaskSlice";
 import classes from "./Modal.module.scss";
+import { useSelector } from "react-redux";
 
-const Modal = ({ activeModal, setActiveModal, children }) => {
+const Modal = ({ children }) => {
   const classModal = classes.modal;
   const classActive = classes.active;
+
+  const { activeModal } = useSelector((state) => state.edit);
 
   return (
     <div

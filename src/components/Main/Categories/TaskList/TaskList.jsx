@@ -2,16 +2,11 @@ import React from "react";
 import Task from "./Task/Task";
 import { useSelector, useDispatch } from "react-redux";
 
-import {
-  setEntireTaskList,
-  fetchTasks,
-} from "../../../../redux/slices/editTaskSlice";
+import { fetchTasks } from "../../../../redux/slices/editTaskSlice";
 
 import classes from "../Categories.module.scss";
 
 const TaskList = ({ titleCategory, colorTitleCategoryBack, category }) => {
-  //   const [entireTaskList, setEntireTaskList] = React.useState([]); // состояние которое хранит инфу о бо всех карточках
-
   const { entireTaskList } = useSelector((state) => state.edit);
   const dispatch = useDispatch();
 

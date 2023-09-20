@@ -3,21 +3,23 @@ import classes from "./Popup.module.scss";
 import Modal from "./Modal/Modal";
 import Form from "./Form/Form";
 import { useSelector, useDispatch } from "react-redux";
-import { setRememberCategory } from "../../../../redux/slices/editTaskSlice";
+import {
+  setRememberCategory,
+  setActiveModal,
+} from "../../../../redux/slices/editTaskSlice";
 import sectionTasks from "../../../../assets/sectionTasks.json";
 
 const Popup = () => {
-  //   const categoryId = useSelector((state) => state.edit.categoryId);
+  const activeModal = useSelector((state) => state.edit.activeModal);
   const dispatch = useDispatch();
 
   const [selected, setSelected] = React.useState(4); // состояние для списка задач, наведение на li
   let activeTask = classes.active; // создал эту переменную, чтобы записать в неё css модуль, иначе он не передастся в li
 
-  const [activeModal, setActiveModal] = React.useState(false);
+  //   const [activeModal, setActiveModal] = React.useState(false);
 
   const handleClick = (category) => {
-    setActiveModal(!activeModal);
-    //  setRememberCategory(category);
+    dispatch(setActiveModal(!activeModal)); // активирование/деактивирование модального окна
     dispatch(setRememberCategory(category)); //передал категорию в диспатч
   };
 
@@ -37,11 +39,9 @@ const Popup = () => {
         ))}
       </ul>
       {activeModal && (
-        <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
+        <Modal>
           <Form
-            activeModal={activeModal}
-            setActiveModal={setActiveModal}
-            // rememberCategory={rememberCategory}
+          // rememberCategory={rememberCategory}
           />
         </Modal>
       )}

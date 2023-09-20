@@ -1,9 +1,21 @@
 import React from "react";
 import MenuModal from "./MenuModal/MenuModal";
+import { useDispatch, useSelector } from "react-redux";
 import classes from "../../Categories.module.scss";
+import {
+  setMenuActive,
+  setMenuActiveId,
+} from "../../../../../redux/slices/editTaskSlice";
 
 const Task = ({ taskItem }) => {
-  const [menuActive, setMenuActive] = React.useState(false);
+  const { menuActive, menuActiveId } = useSelector((state) => state.edit);
+  const dispatch = useDispatch();
+  //   const [menuActive, setMenuActive] = React.useState(false);
+
+  const handleMenuClick = (id) => {
+    dispatch(setMenuActive(!menuActive));
+    dispatch(setMenuActiveId(id));
+  };
 
   let taskItemId = taskItem.id;
   return (
@@ -13,7 +25,7 @@ const Task = ({ taskItem }) => {
         <p>{taskItem.text}</p>
       </div>
       <svg
-        onClick={() => setMenuActive(!menuActive)}
+        onClick={() => handleMenuClick(taskItemId)}
         className={classes.menu}
         width={30}
         height={30}
@@ -23,7 +35,9 @@ const Task = ({ taskItem }) => {
       >
         <path d="M140,192a12,12,0,1,1-12-12A12.01375,12.01375,0,0,1,140,192ZM128,76a12,12,0,1,0-12-12A12.01375,12.01375,0,0,0,128,76Zm0,40a12,12,0,1,0,12,12A12.01375,12.01375,0,0,0,128,116Z" />
       </svg>
-      {menuActive && <MenuModal taskItemId={taskItemId}></MenuModal>}
+      {menuActive && taskItemId === menuActiveId && (
+        <MenuModal taskItemId={taskItemId}></MenuModal>
+      )}
     </li>
   );
 };
