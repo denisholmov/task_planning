@@ -9,9 +9,9 @@ import {
 import classes from "./Form.module.scss";
 
 const Form = ({ activeModal, setActiveModal }) => {
-  const categoryId = useSelector((state) => state.edit.categoryId);
-  const titleTask = useSelector((state) => state.edit.titleTask);
-  const textTask = useSelector((state) => state.edit.textTask);
+  const { categoryId, titleTask, textTask } = useSelector(
+    (state) => state.edit
+  );
 
   const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ const Form = ({ activeModal, setActiveModal }) => {
     category: categoryId,
     title: titleTask,
     text: textTask,
-  }; // Сюда будут создаваться новые задачи и затем передаваться по запросу POST
+  }; // Сюда создаются новые задачи и затем передаются по запросу POST
 
   const handleInputChange = (event) => {
     dispatch(setSearchInputTask(event.target.value));
