@@ -13,21 +13,6 @@ const MenuModal = ({ taskItemId }) => {
       console.log("Error", error);
       alert("Ошибка при удалении карточки");
     }
-
-    //  fetch(`https://64ca5c17700d50e3c704c7f0.mockapi.io/task/${taskItemId}`, {
-    //    method: "DELETE",
-    //    headers: { "Content-Type": "application/json" },
-    //  })
-    //    .then((res) => {
-    //      if (res.ok) {
-    //        console.log("Успешно удалено");
-    //      } else {
-    //        console.log("Произошла ошибка при удалении");
-    //      }
-    //    })
-    //    .catch((error) => {
-    //      console.log("Произошла ошибка:", error);
-    //    });
   };
 
   return (

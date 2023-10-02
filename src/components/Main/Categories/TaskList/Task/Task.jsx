@@ -3,12 +3,14 @@ import MenuModal from "./MenuModal/MenuModal";
 import { useDispatch, useSelector } from "react-redux";
 import classes from "../../Categories.module.scss";
 import {
+  editSelector,
   setMenuActive,
   setMenuActiveId,
 } from "../../../../../redux/slices/editTaskSlice";
 
 const Task = ({ taskItem }) => {
-  const { menuActive, menuActiveId } = useSelector((state) => state.edit);
+  console.log("перерисовка");
+  const { menuActive, menuActiveId } = useSelector(editSelector);
   const dispatch = useDispatch();
   //   const [menuActive, setMenuActive] = React.useState(false);
 

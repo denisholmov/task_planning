@@ -1,6 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchCreateTasks } from "../../../../../redux/slices/editTaskSlice";
+import {
+  editSelector,
+  fetchCreateTasks,
+} from "../../../../../redux/slices/editTaskSlice";
 
 import {
   setSearchInputTask,
@@ -11,9 +14,7 @@ import {
 import classes from "./Form.module.scss";
 
 const Form = () => {
-  const { categoryId, titleTask, textTask } = useSelector(
-    (state) => state.edit
-  );
+  const { categoryId, titleTask, textTask } = useSelector(editSelector);
 
   const dispatch = useDispatch();
 

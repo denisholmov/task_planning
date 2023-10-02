@@ -6,17 +6,16 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   setRememberCategory,
   setActiveModal,
+  editSelectorActivaModal,
 } from "../../../../redux/slices/editTaskSlice";
 import sectionTasks from "../../../../assets/sectionTasks.json";
 
 const Popup = () => {
-  const activeModal = useSelector((state) => state.edit.activeModal);
+  const activeModal = useSelector(editSelectorActivaModal);
   const dispatch = useDispatch();
 
   const [selected, setSelected] = React.useState(4); // состояние для списка задач, наведение на li
   let activeTask = classes.active; // создал эту переменную, чтобы записать в неё css модуль, иначе он не передастся в li
-
-  //   const [activeModal, setActiveModal] = React.useState(false);
 
   const handleClick = (category) => {
     dispatch(setActiveModal(!activeModal)); // активирование/деактивирование модального окна

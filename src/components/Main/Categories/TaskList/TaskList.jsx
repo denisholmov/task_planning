@@ -2,12 +2,15 @@ import React from "react";
 import Task from "./Task/Task";
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchTasks } from "../../../../redux/slices/editTaskSlice";
+import {
+  editSelector,
+  fetchTasks,
+} from "../../../../redux/slices/editTaskSlice";
 
 import classes from "../Categories.module.scss";
 
 const TaskList = ({ titleCategory, colorTitleCategoryBack, category }) => {
-  const { entireTaskList } = useSelector((state) => state.edit);
+  const { entireTaskList } = useSelector(editSelector);
   const dispatch = useDispatch();
 
   React.useEffect(() => {

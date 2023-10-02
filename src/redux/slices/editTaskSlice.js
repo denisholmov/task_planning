@@ -106,6 +106,9 @@ export const editTaskSlice = createSlice({
   },
 });
 
+export const editSelector = (state) => state.edit;
+export const editSelectorActivaModal = (state) => state.edit.activeModal;
+
 export const {
   setRememberCategory,
   setSearchInputTask,
