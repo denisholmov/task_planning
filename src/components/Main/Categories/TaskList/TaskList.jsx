@@ -10,6 +10,7 @@ import {
 import classes from "../Categories.module.scss";
 
 const TaskList = ({ titleCategory, colorTitleCategoryBack, category }) => {
+  console.log("Перерисовка taskList");
   const { entireTaskList } = useSelector(editSelector);
   const dispatch = useDispatch();
 

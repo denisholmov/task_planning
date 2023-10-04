@@ -3,6 +3,7 @@ import classes from "./Categories.module.scss";
 import TaskList from "./TaskList/TaskList";
 
 const Categories = () => {
+  console.log("Перерисовка categories");
   const [taskCategories, setTaskCategories] = React.useState([]);
 
   React.useEffect(() => {

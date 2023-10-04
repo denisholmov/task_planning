@@ -39,9 +39,7 @@ const Popup = () => {
       </ul>
       {activeModal && (
         <Modal>
-          <Form
-          // rememberCategory={rememberCategory}
-          />
+          <Form />
         </Modal>
       )}
     </div>

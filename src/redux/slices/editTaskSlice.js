@@ -48,12 +48,20 @@ export const fetchDeleteTask = createAsyncThunk(
   }
 );
 
+// export const fetchEditCardTask = createAsyncThunk(
+//   "editTask/fetchEditCardTaskStatus",
+//   async ({ taskItemId }) => {
+//     const response = await fetch();
+//   }
+// );
+
 const initialState = {
   categoryId: 0,
   titleTask: "", // searchInputTask
   textTask: "", // searchTextareaTask
   entireTaskList: [],
   activeModal: false,
+  activeEditModal: false,
   newTask: "",
   menuActive: false,
   menuActiveId: null,
@@ -82,6 +90,10 @@ export const editTaskSlice = createSlice({
     setActiveModal: (state, action) => {
       state.activeModal = action.payload; // этот action активизирует или деактивизирует модальное окно для создания задачек
     },
+
+    setActiveEditModal: (state, action) => {
+      state.activeEditModal = action.payload;
+    }, // открытие, закрытие редактирующего модального окна
 
     setMenuActive: (state, action) => {
       state.menuActive = action.payload; // этот action включает или выключает меню карточки.
@@ -117,6 +129,7 @@ export const {
   setActiveModal,
   setMenuActive,
   setMenuActiveId,
+  setActiveEditModal,
 } = editTaskSlice.actions;
 
 export default editTaskSlice.reducer;
