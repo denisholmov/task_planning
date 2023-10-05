@@ -8,18 +8,17 @@ import {
   setMenuActiveId,
 } from "../../../../../redux/slices/editTaskSlice";
 
-const Task = ({ taskItem }) => {
-  console.log("перерисовка");
+const Task = React.memo(({ taskItem }) => {
   const { menuActive, menuActiveId } = useSelector(editSelector);
   const dispatch = useDispatch();
-  //   const [menuActive, setMenuActive] = React.useState(false);
 
-  const handleMenuClick = (id) => {
+  const handleMenuClick = React.useCallback((id) => {
     dispatch(setMenuActive(!menuActive));
     dispatch(setMenuActiveId(id));
-  };
+  }, []);
 
   let taskItemId = taskItem.id;
+
   return (
     <li key={taskItem.id} className={classes.card}>
       <div className={classes.content}>
@@ -42,6 +41,6 @@ const Task = ({ taskItem }) => {
       )}
     </li>
   );
-};
+});
 
 export default Task;

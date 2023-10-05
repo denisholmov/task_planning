@@ -3,18 +3,19 @@ import classes from "./Categories.module.scss";
 import TaskList from "./TaskList/TaskList";
 
 const Categories = () => {
-  console.log("Перерисовка categories");
   const [taskCategories, setTaskCategories] = React.useState([]);
 
   React.useEffect(() => {
-    fetch("https://64ca5c17700d50e3c704c7f0.mockapi.io/itemsTask")
-      .then((res) => {
-        return res.json();
-      })
-      .then((json) => {
-        setTaskCategories(json);
-      });
-  }, []);
+    if (taskCategories.length === 0) {
+      fetch("https://64ca5c17700d50e3c704c7f0.mockapi.io/itemsTask")
+        .then((res) => {
+          return res.json();
+        })
+        .then((json) => {
+          setTaskCategories(json);
+        });
+    }
+  }, [taskCategories]);
 
   return (
     <div className={classes.categories}>

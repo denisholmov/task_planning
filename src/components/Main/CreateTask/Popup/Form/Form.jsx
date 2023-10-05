@@ -24,12 +24,13 @@ const Form = () => {
   //     text: textTask,
   //   }; // Сюда создаются новые задачи и затем передаются по запросу POST
 
-  const handleInputChange = (event) => {
+  const handleInputChange = React.useCallback((event) => {
     dispatch(setSearchInputTask(event.target.value));
-  };
-  const handleTextareaChange = (event) => {
+  }, []);
+
+  const handleTextareaChange = React.useCallback((event) => {
     dispatch(setSearchTextareaTask(event.target.value));
-  };
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();

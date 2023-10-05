@@ -9,37 +9,40 @@ import {
 
 import classes from "../Categories.module.scss";
 
-const TaskList = ({ titleCategory, colorTitleCategoryBack, category }) => {
-  console.log("Перерисовка taskList");
-  const { entireTaskList } = useSelector(editSelector);
-  const dispatch = useDispatch();
+const TaskList = React.memo(
+  ({ titleCategory, colorTitleCategoryBack, category }) => {
 
-  React.useEffect(() => {
-    try {
-      dispatch(fetchTasks());
-    } catch (error) {
-      console.log("ERROR", error);
-      alert("Ошибка при получении задач");
-    }
-  }, []);
+    const { entireTaskList } = useSelector(editSelector);
+    const dispatch = useDispatch();
 
-  return (
-    <div className={classes.taskList}>
-      <div
-        className={classes.titleTask}
-        style={{ backgroundColor: colorTitleCategoryBack }}
-      >
-        <h2>{titleCategory}</h2>
+    React.useEffect(() => {
+      try {
+        dispatch(fetchTasks());
+        console.log("Запрос сделался кучу раз");
+      } catch (error) {
+        console.log("ERROR", error);
+        alert("Ошибка при получении задач");
+      }
+    }, []);
+
+    return (
+      <div className={classes.taskList}>
+        <div
+          className={classes.titleTask}
+          style={{ backgroundColor: colorTitleCategoryBack }}
+        >
+          <h2>{titleCategory}</h2>
+        </div>
+        <ul>
+          {entireTaskList.map((taskItem) =>
+            category.category === taskItem.category ? (
+              <Task key={taskItem.id} taskItem={taskItem} />
+            ) : undefined
+          )}
+        </ul>
       </div>
-      <ul>
-        {entireTaskList.map((taskItem) =>
-          category.category === taskItem.category ? (
-            <Task key={taskItem.id} taskItem={taskItem} />
-          ) : undefined
-        )}
-      </ul>
-    </div>
-  );
-};
+    );
+  }
+);
 
 export default TaskList;

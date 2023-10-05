@@ -42,7 +42,8 @@ const FormEdit = () => {
       .then((data) => {
         setSearchInputTask(data.title);
         setSearchTextareaTask(data.text);
-      })
+      }),
+    []
   );
 
   const handleSubmit = (event) => {

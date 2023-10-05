@@ -6,9 +6,9 @@ const CreateTask = () => {
   const [open, setOpen] = React.useState(false); // открыть, закрыть список задач
   const list = ["Не запущен", "В процессе", "Заблокирован", "Сделано"];
 
-  const onClickAddTask = () => {
+  const onClickAddTask = React.useCallback(() => {
     setOpen(!open);
-  };
+  }, []);
 
   return (
     <div className={classes.popup}>
