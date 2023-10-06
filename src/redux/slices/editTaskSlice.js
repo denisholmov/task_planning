@@ -110,6 +110,7 @@ export const editTaskSlice = createSlice({
       })
       .addCase(fetchCreateTasks.fulfilled, (state, action) => {
         state.newTask = action.payload;
+        state.entireTaskList = state.entireTaskList.concat(action.payload);
         state.activeModal = false;
       })
       .addCase(fetchDeleteTask.fulfilled, (state, action) => {
