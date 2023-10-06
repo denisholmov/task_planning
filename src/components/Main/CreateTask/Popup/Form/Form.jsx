@@ -24,13 +24,13 @@ const Form = () => {
   //     text: textTask,
   //   }; // Сюда создаются новые задачи и затем передаются по запросу POST
 
-  const handleInputChange = React.useCallback((event) => {
+  const handleInputChange = (event) => {
     dispatch(setSearchInputTask(event.target.value));
-  }, []);
+  };
 
-  const handleTextareaChange = React.useCallback((event) => {
+  const handleTextareaChange = (event) => {
     dispatch(setSearchTextareaTask(event.target.value));
-  }, []);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -58,7 +58,7 @@ const Form = () => {
           <button
             className={classes.btnCancel}
             type="button"
-            onClick={() => setActiveModal(false)}
+            onClick={() => dispatch(setActiveModal(false))}
           >
             Отмена
           </button>
