@@ -1,0 +1,24 @@
+.taskPopup {
+  padding: 10px 20px;
+  min-width: 100px;
+  max-width: 200px;
+  text-align: center;
+  background-color: var(--color-white);
+
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--lead);
+
+  border-radius: 10px;
+
+  position: absolute;
+  z-index: 10;
+  left: 0;
+
+  overflow: hidden;
+}
+
+.active {
+  background-color: var(--unique-gray);
+  border-radius: 5px;
+}

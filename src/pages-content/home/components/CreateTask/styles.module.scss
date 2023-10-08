@@ -1,0 +1,21 @@
+.popup {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.btn {
+  margin-bottom: 3px;
+  padding: 10px 15px;
+
+  color: var(--color-white);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+
+  background-color: var(--feather-star);
+  border-radius: 25px;
+
+  &:hover {
+    background-color: var(--aero);
+  }
+}
