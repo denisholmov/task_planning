@@ -1,20 +1,22 @@
 import React from "react";
 import styles from "./styles.module.scss";
-import { Popup } from "./Popup";
+import { PopupAddCard } from "./Popup";
 
 export const CreateTask = () => {
-  const [open, setOpen] = React.useState(false); // открыть, закрыть список задач
+  const [isPACRender, setIsPACRender] = React.useState(false);
 
-  const onClickAddTask = () => {
-    setOpen(!open);
+  const buttonAddCardText = isPACRender ? "Скрыть" : "Добавить";
+
+  const buttonAddCardClickHandler = () => {
+    setIsPACRender((prev) => !prev);
   };
 
   return (
     <div className={styles.popup}>
-      <button onClick={onClickAddTask} className={styles.btn}>
-        Добавить карточку
+      <button onClick={buttonAddCardClickHandler} className={styles.btn}>
+        {buttonAddCardText} карточку
       </button>
-      {open && <Popup />}
+      {isPACRender && <PopupAddCard />}
     </div>
   );
 };

@@ -25,7 +25,7 @@ export const Categories = () => {
           titleCategory={category.title}
           colorTitleCategoryBack={category.color}
           category={category}
-        /> // Сюда подгрузил 4 столбца с задачами
+        />
       ))}
     </div>
   );

@@ -2,7 +2,7 @@ import React from "react";
 import {
   editSelector,
   setActiveModal,
-} from "../../../../../../redux/slices/editTaskSlice";
+} from "../../../../../../../redux/slices/editTaskSlice";
 import styles from "./styles.module.scss";
 import { useSelector } from "react-redux";
 
@@ -18,7 +18,6 @@ export const Modal = ({ children }) => {
       onClick={() => setActiveModal(false)}
     >
       <div className={styles.content} onClick={(e) => e.stopPropagation()}>
-        {/* Смотреть урок модальное окно, помоему на канале ulbi tv */}
         {children}
       </div>
     </div>

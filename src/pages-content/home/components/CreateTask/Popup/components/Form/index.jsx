@@ -3,13 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   editSelector,
   fetchCreateTasks,
-} from "../../../../../../redux/slices/editTaskSlice";
+} from "../../../../../../../redux/slices/editTaskSlice";
 
 import {
   setSearchInputTask,
   setSearchTextareaTask,
   setActiveModal,
-} from "../../../../../../redux/slices/editTaskSlice";
+} from "../../../../../../../redux/slices/editTaskSlice";
 
 import styles from "./styles.module.scss";
 
@@ -57,7 +57,7 @@ export const Form = () => {
             Отмена
           </button>
           <button
-            disabled={titleTask.length >= 1 ? false : true} // делаем кнопку активной либо неактивной
+            disabled={titleTask.length >= 1 ? false : true}
             className={styles.btnCreate}
             type="button"
             onClick={handleSubmit}
