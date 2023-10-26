@@ -3,18 +3,18 @@ import { useSelector, useDispatch } from "react-redux";
 
 import {
   editSelector,
-  fetchCreateTasks,
-} from "../../../../../../../redux/slices/editTaskSlice";
+  fetchEditTask,
+} from "../../../../../../../../../redux/slices/editTaskSlice";
 
 import {
   setSearchInputTask,
   setSearchTextareaTask,
-  setActiveModal,
-} from "../../../../../../../redux/slices/editTaskSlice";
+  setActiveEditModal,
+} from "../../../../../../../../../redux/slices/editTaskSlice";
 
 import styles from "./styles.module.scss";
 
-export const Form = () => {
+export const FormEdit = () => {
   const { categoryId, titleTask, textTask } = useSelector(editSelector);
 
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ export const Form = () => {
 
     try {
       dispatch(
-        fetchCreateTasks({
+        fetchEditTask({
           categoryId,
           titleTask,
           textTask,
@@ -46,14 +46,14 @@ export const Form = () => {
 
   return (
     <div>
-      <p className={styles.title}>Добавьте карточку</p>
+      <p className={styles.title}>Исправьте карточку</p>
 
       <form className={styles.form}>
         <div className={styles.buttons}>
           <button
             className={styles.btnCancel}
             type="button"
-            onClick={() => dispatch(setActiveModal(false))}
+            onClick={() => dispatch(setActiveEditModal(false))}
           >
             Отмена
           </button>
@@ -63,7 +63,7 @@ export const Form = () => {
             type="button"
             onClick={handleSubmit}
           >
-            Создать
+            Сохранить
           </button>
         </div>
         <div className={styles.cardName}>
@@ -71,7 +71,7 @@ export const Form = () => {
           <input
             value={titleTask}
             onChange={handleInputChange}
-            placeholder="Добавить название"
+            placeholder="Название"
             type="text"
             name="heading"
           />
@@ -81,7 +81,7 @@ export const Form = () => {
           <textarea
             value={textTask}
             onChange={handleTextareaChange}
-            placeholder="Добавить заметку"
+            placeholder="Заметка"
             name="note"
           ></textarea>
         </div>

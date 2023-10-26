@@ -55,6 +55,21 @@ export const fetchDeleteTask = createAsyncThunk(
 //   }
 // );
 
+export const fetchEditTask = createAsyncThunk(
+  "editTask/fetchEditTaskStatus",
+  async ({ taskItemId }) => {
+    const response = await fetch(
+      `https://64ca5c17700d50e3c704c7f0.mockapi.io/task/${taskItemId}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    const data = await response.json();
+    return data; // fetch запрос на удаление карточек
+  }
+);
+
 const initialState = {
   categoryId: 0,
   titleTask: "", // searchInputTask
@@ -115,7 +130,10 @@ export const editTaskSlice = createSlice({
       })
       .addCase(fetchDeleteTask.fulfilled, (state, action) => {
         state.menuActive = false;
-      });
+      })
+		.addCase(fetchEditTask.fulfilled, (state, action) => {
+			state.menuActive = false;
+		 });
   },
 });
 

@@ -1,5 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ModalEdit } from "./components/ModalEdit";
+import { FormEdit } from "./components/FormEdit";
 import { setActiveEditModal } from "../../../../../../../redux/slices/editTaskSlice";
 import { fetchDeleteTask } from "../../../../../../../redux/slices/editTaskSlice";
 import styles from "./styles.module.scss";
@@ -18,18 +20,18 @@ export const MenuModal = ({ taskItemId }) => {
   };
 
   const handleOpenEditModal = () => {
-    dispatch(setActiveEditModal(!activeEditModal));
+    dispatch(setActiveEditModal(true));
   };
 
   return (
     <div className={styles.popup}>
       <p onClick={handleOpenEditModal}>Изменить</p>
       <p onClick={deleteTaskBackend}>Удалить</p>
-      {/* {activeEditModal && (
+      {activeEditModal && (
         <ModalEdit>
           <FormEdit></FormEdit>
         </ModalEdit>
-      )} */}
+      )}
     </div>
   );
 };
