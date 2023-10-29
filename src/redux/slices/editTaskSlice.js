@@ -29,6 +29,7 @@ export const fetchCreateTasks = createAsyncThunk(
       }
     );
     const data = await response.json();
+
     return data; // fetch запрос на создание карточек
   }
 );
@@ -44,29 +45,33 @@ export const fetchDeleteTask = createAsyncThunk(
       }
     );
     const data = await response.json();
+
     return data; // fetch запрос на удаление карточек
   }
 );
 
-// export const fetchEditCardTask = createAsyncThunk(
-//   "editTask/fetchEditCardTaskStatus",
-//   async ({ taskItemId }) => {
-//     const response = await fetch();
-//   }
-// );
-
 export const fetchEditTask = createAsyncThunk(
   "editTask/fetchEditTaskStatus",
-  async ({ taskItemId }) => {
+  async ({
+    taskItemId,
+    categoryIdForEditFormTask,
+    titleTaskForEditFormInput,
+    textTaskForEditFormInput,
+  }) => {
     const response = await fetch(
       `https://64ca5c17700d50e3c704c7f0.mockapi.io/task/${taskItemId}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          category: categoryIdForEditFormTask,
+          title: titleTaskForEditFormInput,
+          text: textTaskForEditFormInput,
+        }),
       }
     );
     const data = await response.json();
-    return data; // fetch запрос на удаление карточек
+    return data; // fetch запрос на редактирование карточек
   }
 );
 
@@ -80,6 +85,9 @@ const initialState = {
   newTask: "",
   menuActive: false,
   menuActiveId: null,
+  categoryIdForEditFormTask: 0,
+  titleTaskForEditFormInput: "",
+  textTaskForEditFormInput: "",
 };
 
 export const editTaskSlice = createSlice({
@@ -116,6 +124,15 @@ export const editTaskSlice = createSlice({
     setMenuActiveId: (state, action) => {
       state.menuActiveId = action.payload;
     },
+    setTitleTaskForEditFormInput: (state, action) => {
+      state.titleTaskForEditFormInput = action.payload;
+    },
+    setTextTaskForEditFormInput: (state, action) => {
+      state.textTaskForEditFormInput = action.payload;
+    },
+    setCategoryIdForEditFormTask: (state, action) => {
+      state.categoryIdForEditFormTask = action.payload;
+    },
   },
 
   extraReducers: (builder) => {
@@ -131,9 +148,9 @@ export const editTaskSlice = createSlice({
       .addCase(fetchDeleteTask.fulfilled, (state, action) => {
         state.menuActive = false;
       })
-		.addCase(fetchEditTask.fulfilled, (state, action) => {
-			state.menuActive = false;
-		 });
+      .addCase(fetchEditTask.fulfilled, (state, action) => {
+        state.menuActive = false;
+      });
   },
 });
 
@@ -149,6 +166,9 @@ export const {
   setMenuActive,
   setMenuActiveId,
   setActiveEditModal,
+  setTitleTaskForEditFormInput,
+  setTextTaskForEditFormInput,
+  setCategoryIdForEditFormTask,
 } = editTaskSlice.actions;
 
 export default editTaskSlice.reducer;

@@ -2,13 +2,20 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ModalEdit } from "./components/ModalEdit";
 import { FormEdit } from "./components/FormEdit";
-import { setActiveEditModal } from "../../../../../../../redux/slices/editTaskSlice";
+import {
+  setActiveEditModal,
+  setTextTaskForEditFormInput,
+  setTitleTaskForEditFormInput,
+  setCategoryIdForEditFormTask,
+} from "../../../../../../../redux/slices/editTaskSlice";
 import { fetchDeleteTask } from "../../../../../../../redux/slices/editTaskSlice";
 import styles from "./styles.module.scss";
 
 export const MenuModal = ({ taskItemId }) => {
   const dispatch = useDispatch();
-  const { activeEditModal } = useSelector((state) => state.edit);
+  const { activeEditModal, entireTaskList } = useSelector(
+    (state) => state.edit
+  );
 
   const deleteTaskBackend = () => {
     try {
@@ -21,6 +28,21 @@ export const MenuModal = ({ taskItemId }) => {
 
   const handleOpenEditModal = () => {
     dispatch(setActiveEditModal(true));
+    dispatch(
+      setTextTaskForEditFormInput(
+        entireTaskList.find((obj) => obj.id === taskItemId).text
+      )
+    );
+    dispatch(
+      setTitleTaskForEditFormInput(
+        entireTaskList.find((obj) => obj.id === taskItemId).title
+      )
+    );
+    dispatch(
+      setCategoryIdForEditFormTask(
+        entireTaskList.find((obj) => obj.id === taskItemId).category
+      )
+    );
   };
 
   return (
@@ -29,7 +51,7 @@ export const MenuModal = ({ taskItemId }) => {
       <p onClick={deleteTaskBackend}>Удалить</p>
       {activeEditModal && (
         <ModalEdit>
-          <FormEdit></FormEdit>
+          <FormEdit taskItemId={taskItemId}></FormEdit>
         </ModalEdit>
       )}
     </div>
