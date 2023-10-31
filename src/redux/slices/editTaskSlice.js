@@ -150,6 +150,12 @@ export const editTaskSlice = createSlice({
       })
       .addCase(fetchEditTask.fulfilled, (state, action) => {
         state.menuActive = false;
+        state.entireTaskList = state.entireTaskList.map((item) => {
+          if (item.id === action.payload.id) {
+            return action.payload;
+          }
+          return item;
+        });
       });
   },
 });
