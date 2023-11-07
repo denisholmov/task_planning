@@ -44,6 +44,7 @@ export const fetchDeleteTask = createAsyncThunk(
         headers: { "Content-Type": "application/json" },
       }
     );
+
     const data = await response.json();
 
     return data; // fetch запрос на удаление карточек
@@ -71,6 +72,7 @@ export const fetchEditTask = createAsyncThunk(
       }
     );
     const data = await response.json();
+    console.log(data);
     return data; // fetch запрос на редактирование карточек
   }
 );
@@ -88,6 +90,7 @@ const initialState = {
   categoryIdForEditFormTask: 0,
   titleTaskForEditFormInput: "",
   textTaskForEditFormInput: "",
+  successfulRequestMethodDelete: false,
 };
 
 export const editTaskSlice = createSlice({
@@ -133,6 +136,9 @@ export const editTaskSlice = createSlice({
     setCategoryIdForEditFormTask: (state, action) => {
       state.categoryIdForEditFormTask = action.payload;
     },
+    setSuccessfulRequestMethodDelete: (state, action) => {
+      state.successfulRequestMethodDelete = action.payload;
+    },
   },
 
   extraReducers: (builder) => {
@@ -147,6 +153,7 @@ export const editTaskSlice = createSlice({
       })
       .addCase(fetchDeleteTask.fulfilled, (state, action) => {
         state.menuActive = false;
+        state.successfulRequestMethodDelete = true;
       })
       .addCase(fetchEditTask.fulfilled, (state, action) => {
         state.menuActive = false;
@@ -175,6 +182,7 @@ export const {
   setTitleTaskForEditFormInput,
   setTextTaskForEditFormInput,
   setCategoryIdForEditFormTask,
+  setSuccessfulRequestMethodDelete,
 } = editTaskSlice.actions;
 
 export default editTaskSlice.reducer;

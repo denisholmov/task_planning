@@ -26,6 +26,11 @@ export const MenuModal = ({ taskItemId }) => {
     }
   };
 
+  //   if (successfulRequestMethodDelete) {
+  //     dispatch(fetchTasks());
+  //     dispatch(setSuccessfulRequestMethodDelete(false));
+  //   }
+
   const handleOpenEditModal = () => {
     dispatch(setActiveEditModal(true));
     dispatch(

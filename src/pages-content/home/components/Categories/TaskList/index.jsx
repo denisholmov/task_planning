@@ -1,6 +1,7 @@
 import React from "react";
 import { Task } from "./Task/";
 import { useSelector, useDispatch } from "react-redux";
+import { setSuccessfulRequestMethodDelete } from "../../../../../redux/slices/editTaskSlice";
 
 import {
   editSelector,
@@ -14,18 +15,21 @@ export const TaskList = ({
   colorTitleCategoryBack,
   category,
 }) => {
-  const { entireTaskList } = useSelector(editSelector);
+  const { entireTaskList, successfulRequestMethodDelete } =
+    useSelector(editSelector);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     try {
       dispatch(fetchTasks());
-      console.log("Запрос сделался кучу раз");
+      if (successfulRequestMethodDelete) {
+        dispatch(setSuccessfulRequestMethodDelete(false));
+      }
     } catch (error) {
       console.log("ERROR", error);
       alert("Ошибка при получении задач");
     }
-  }, []);
+  }, [successfulRequestMethodDelete]);
 
   return (
     <div className={styles.taskList}>
