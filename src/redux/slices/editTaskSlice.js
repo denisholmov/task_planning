@@ -77,6 +77,25 @@ export const fetchEditTask = createAsyncThunk(
   }
 );
 
+export const fetchEditCategoryDragNDrop = createAsyncThunk(
+  "editTask/fetchEditDragNDroptatus",
+  async ({ currentDrugNDropIdItem, currentDrugNDropCategoryBoard }) => {
+    const response = await fetch(
+      `https://64ca5c17700d50e3c704c7f0.mockapi.io/task/${currentDrugNDropIdItem}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          category: currentDrugNDropCategoryBoard,
+        }),
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+    return data; // fetch запрос на редактирование категории карточек во время drag-n-drop
+  }
+);
+
 const initialState = {
   categoryId: 0,
   titleTask: "", // searchInputTask
@@ -91,6 +110,9 @@ const initialState = {
   titleTaskForEditFormInput: "",
   textTaskForEditFormInput: "",
   successfulRequestMethodDelete: false,
+  currentDrugNDropCategoryItem: 0,
+  currentDrugNDropIdItem: 0,
+  currentDrugNDropCategoryBoard: 0,
 };
 
 export const editTaskSlice = createSlice({
@@ -139,6 +161,15 @@ export const editTaskSlice = createSlice({
     setSuccessfulRequestMethodDelete: (state, action) => {
       state.successfulRequestMethodDelete = action.payload;
     },
+    setCurrentDrugNDropCategoryItem: (state, action) => {
+      state.currentDrugNDropCategoryItem = action.payload;
+    },
+    setCurrentDrugNDropIdItem: (state, action) => {
+      state.currentDrugNDropIdItem = action.payload;
+    },
+    setCurrentDrugNDropCategoryBoard: (state, action) => {
+      state.currentDrugNDropCategoryBoard = action.payload;
+    },
   },
 
   extraReducers: (builder) => {
@@ -157,6 +188,14 @@ export const editTaskSlice = createSlice({
       })
       .addCase(fetchEditTask.fulfilled, (state, action) => {
         state.menuActive = false;
+        state.entireTaskList = state.entireTaskList.map((item) => {
+          if (item.id === action.payload.id) {
+            return action.payload;
+          }
+          return item;
+        });
+      })
+      .addCase(fetchEditCategoryDragNDrop.fulfilled, (state, action) => {
         state.entireTaskList = state.entireTaskList.map((item) => {
           if (item.id === action.payload.id) {
             return action.payload;
@@ -183,6 +222,9 @@ export const {
   setTextTaskForEditFormInput,
   setCategoryIdForEditFormTask,
   setSuccessfulRequestMethodDelete,
+  setCurrentDrugNDropCategoryItem,
+  setCurrentDrugNDropIdItem,
+  setCurrentDrugNDropCategoryBoard,
 } = editTaskSlice.actions;
 
 export default editTaskSlice.reducer;

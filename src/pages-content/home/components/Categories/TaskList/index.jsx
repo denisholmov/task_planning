@@ -1,11 +1,16 @@
 import React from "react";
 import { Task } from "./Task/";
 import { useSelector, useDispatch } from "react-redux";
-import { setSuccessfulRequestMethodDelete } from "../../../../../redux/slices/editTaskSlice";
+import {
+  setSuccessfulRequestMethodDelete,
+  setCurrentDrugNDropCategoryBoard,
+  setEntireTaskList,
+} from "../../../../../redux/slices/editTaskSlice";
 
 import {
   editSelector,
   fetchTasks,
+  fetchEditCategoryDragNDrop,
 } from "../../../../../redux/slices/editTaskSlice";
 
 import styles from "../styles.module.scss";
@@ -13,10 +18,15 @@ import styles from "../styles.module.scss";
 export const TaskList = ({
   titleCategory,
   colorTitleCategoryBack,
-  category,
+  taskCategory,
 }) => {
-  const { entireTaskList, successfulRequestMethodDelete } =
-    useSelector(editSelector);
+  const {
+    entireTaskList,
+    successfulRequestMethodDelete,
+    currentDrugNDropCategoryBoard,
+
+    currentDrugNDropIdItem,
+  } = useSelector(editSelector);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -31,8 +41,31 @@ export const TaskList = ({
     }
   }, [successfulRequestMethodDelete]);
 
+  function dragOverHandler(e) {
+    e.preventDefault();
+  }
+
+  function dropHandler(e, category) {
+    e.preventDefault();
+
+    dispatch(setCurrentDrugNDropCategoryBoard(category));
+  }
+
+  React.useEffect(() => {
+    dispatch(
+      fetchEditCategoryDragNDrop({
+        currentDrugNDropIdItem,
+        currentDrugNDropCategoryBoard,
+      })
+    );
+  }, [currentDrugNDropCategoryBoard]);
+
   return (
-    <div className={styles.taskList}>
+    <div
+      onDragOver={(e) => dragOverHandler(e)}
+      onDrop={(e) => dropHandler(e, taskCategory.category)}
+      className={styles.taskList}
+    >
       <div
         className={styles.titleTask}
         style={{ backgroundColor: colorTitleCategoryBack }}
@@ -41,8 +74,12 @@ export const TaskList = ({
       </div>
       <ul>
         {entireTaskList.map((taskItem) =>
-          category.category === taskItem.category ? (
-            <Task key={taskItem.id} taskItem={taskItem} />
+          taskCategory.category === taskItem.category ? (
+            <Task
+              taskItem={taskItem}
+              category={taskCategory.category}
+              key={taskItem.id}
+            />
           ) : undefined
         )}
       </ul>

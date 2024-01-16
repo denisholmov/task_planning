@@ -2,14 +2,18 @@ import React from "react";
 import { MenuModal } from "./MenuModal/index";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../../styles.module.scss";
+
 import {
   editSelector,
   setMenuActive,
   setMenuActiveId,
+  setCurrentDrugNDropCategoryItem,
+  setCurrentDrugNDropIdItem,
 } from "../../../../../../redux/slices/editTaskSlice";
 
-export const Task = ({ taskItem }) => {
-  const { menuActive, menuActiveId } = useSelector(editSelector);
+export const Task = ({ taskItem, category }) => {
+  const { menuActive, menuActiveId, currentDrugNDropCategoryItem } =
+    useSelector(editSelector);
   const dispatch = useDispatch();
 
   const handleMenuClick = (id) => {
@@ -19,8 +23,18 @@ export const Task = ({ taskItem }) => {
 
   let taskItemId = taskItem.id;
 
+  function dragStartHandler(e, category, taskItemId) {
+    dispatch(setCurrentDrugNDropCategoryItem(category));
+    dispatch(setCurrentDrugNDropIdItem(taskItemId));
+  } // Здесь будем вызывать состояния которые запоминаются в редаксе, это состояние текущей карточки(id и category)
+
   return (
-    <li key={taskItem.id} className={styles.card}>
+    <li
+      draggable={true}
+      onDragStart={(e) => dragStartHandler(e, category, taskItemId)}
+      key={taskItem.id}
+      className={styles.card}
+    >
       <div className={styles.content}>
         <h3>{taskItem.title}</h3>
         <p>{taskItem.text}</p>

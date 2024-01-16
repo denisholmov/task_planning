@@ -19,12 +19,12 @@ export const Categories = () => {
 
   return (
     <div className={styles.categories}>
-      {taskCategories.map((category) => (
+      {taskCategories.map((taskCategory) => (
         <TaskList
-          key={category.id}
-          titleCategory={category.title}
-          colorTitleCategoryBack={category.color}
-          category={category}
+          titleCategory={taskCategory.title}
+          colorTitleCategoryBack={taskCategory.color}
+          taskCategory={taskCategory}
+          key={taskCategory.id}
         />
       ))}
     </div>
