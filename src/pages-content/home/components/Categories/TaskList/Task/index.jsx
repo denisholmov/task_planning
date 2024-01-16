@@ -12,8 +12,7 @@ import {
 } from "../../../../../../redux/slices/editTaskSlice";
 
 export const Task = ({ taskItem, category }) => {
-  const { menuActive, menuActiveId, currentDrugNDropCategoryItem } =
-    useSelector(editSelector);
+  const { menuActive, menuActiveId } = useSelector(editSelector);
   const dispatch = useDispatch();
 
   const handleMenuClick = (id) => {

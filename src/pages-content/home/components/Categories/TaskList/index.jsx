@@ -1,10 +1,11 @@
 import React from "react";
 import { Task } from "./Task/";
 import { useSelector, useDispatch } from "react-redux";
+import { debounce } from "lodash";
+
 import {
   setSuccessfulRequestMethodDelete,
   setCurrentDrugNDropCategoryBoard,
-  setEntireTaskList,
 } from "../../../../../redux/slices/editTaskSlice";
 
 import {
@@ -51,12 +52,31 @@ export const TaskList = ({
     dispatch(setCurrentDrugNDropCategoryBoard(category));
   }
 
+  //   React.useEffect(() => {
+  //     dispatch(
+  //       fetchEditCategoryDragNDrop({
+  //         currentDrugNDropIdItem,
+  //         currentDrugNDropCategoryBoard,
+  //       })
+  //     );
+  //   }, [currentDrugNDropCategoryBoard]);
+  const delayedFetchEditCategoryDragNDrop = debounce(
+    (currentDrugNDropIdItem, currentDrugNDropCategoryBoard) => {
+      dispatch(
+        fetchEditCategoryDragNDrop({
+          currentDrugNDropIdItem,
+          currentDrugNDropCategoryBoard,
+        })
+      );
+    },
+    200
+  );
+
   React.useEffect(() => {
-    dispatch(
-      fetchEditCategoryDragNDrop({
-        currentDrugNDropIdItem,
-        currentDrugNDropCategoryBoard,
-      })
+    // Вызываем обертку функции
+    delayedFetchEditCategoryDragNDrop(
+      currentDrugNDropIdItem,
+      currentDrugNDropCategoryBoard
     );
   }, [currentDrugNDropCategoryBoard]);
 
